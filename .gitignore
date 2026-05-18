@@ -1,0 +1,14 @@
+.env
+.env.local
+__pycache__/
+*.py[cod]
+*.pyc
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.DS_Store
+*.log
+*.json.bak
+# 不忽略 docs/data/ — 这些是 GitHub Pages 需要的静态文件

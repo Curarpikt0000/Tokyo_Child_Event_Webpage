@@ -1,0 +1,15 @@
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+playwright>=1.40.0
+python-dateutil>=2.8.2
+python-dotenv>=1.0.0
+pyarrow>=15.0.0
+google-cloud-aiplatform>=1.60.0
+google-genai>=1.0.0
+
+# 现代智能爬虫与抗指纹自动化工具
+scrapling
+camoufox[geoip]
+stagehand
+browserbase
