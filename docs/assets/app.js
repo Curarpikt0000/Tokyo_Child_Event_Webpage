@@ -278,24 +278,40 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (event.indoor) {
                 tagsHtml += `<span class="tag tag-type" style="background:#E3F2FD; color:#1565C0;">室内</span>`;
             }
+            if (event.ai_score !== undefined && event.ai_score !== null) {
+                tagsHtml += `<span class="tag tag-score" style="background:#FFF9C4; color:#F57F17; font-weight:700;"><i class="fa-solid fa-star" style="color:#F57F17;"></i> ${parseFloat(event.ai_score).toFixed(1)}</span>`;
+            }
             
             // Date formatting
             const dateStr = event.date || '未定';
             
             const summaryHtml = event.summary_zh ? md(event.summary_zh) : '<p>暂无详细介绍</p>';
             
+            // Image formatting
+            let imgHtml = '';
+            if (event.image_url) {
+                imgHtml = `
+                    <div class="card-image-wrapper">
+                        <img src="${event.image_url}" alt="${event.title_zh || '活动图片'}" class="card-image" loading="lazy" onerror="this.parentElement.style.display='none';">
+                    </div>
+                `;
+            }
+            
             card.innerHTML = `
-                <div class="card-header">
-                    <div class="card-tags">${tagsHtml}</div>
-                    <div class="card-date">${dateStr}</div>
-                </div>
-                <h3 class="card-title">${event.title_zh || event.title_ja || '未知活动'}</h3>
-                <div class="card-meta">
-                    ${event.ward || event.venue ? `<span><i class="fa-solid fa-location-dot"></i> ${event.ward || ''} ${event.venue || ''}</span>` : ''}
-                    ${event.time_start ? `<span><i class="fa-regular fa-clock"></i> ${event.time_start}${event.time_end ? ' - ' + event.time_end : ''}</span>` : ''}
-                </div>
-                <div class="card-summary">
-                    ${summaryHtml}
+                ${imgHtml}
+                <div class="card-body">
+                    <div class="card-header">
+                        <div class="card-tags">${tagsHtml}</div>
+                        <div class="card-date">${dateStr}</div>
+                    </div>
+                    <h3 class="card-title">${event.title_zh || event.title_ja || '未知活动'}</h3>
+                    <div class="card-meta">
+                        ${event.ward || event.venue ? `<span><i class="fa-solid fa-location-dot"></i> ${event.ward || ''} ${event.venue || ''}</span>` : ''}
+                        ${event.time_start ? `<span><i class="fa-regular fa-clock"></i> ${event.time_start}${event.time_end ? ' - ' + event.time_end : ''}</span>` : ''}
+                    </div>
+                    <div class="card-summary">
+                        ${summaryHtml}
+                    </div>
                 </div>
             `;
             

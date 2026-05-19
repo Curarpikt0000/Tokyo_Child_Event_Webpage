@@ -89,7 +89,9 @@ class JSONWriter:
                 "age_min": e.get("age_min", 0),
                 "age_max": e.get("age_max", 10),
                 "free": e.get("free", True),
-                "indoor": not e.get("rain_ok", True) # 依照 AGENTS.md 映射，或者直接映射 rain_ok -> indoor
+                "indoor": not e.get("rain_ok", True), # 依照 AGENTS.md 映射，或者直接映射 rain_ok -> indoor
+                "ai_score": e.get("ai_score", 3.0),
+                "image_url": e.get("image_url", None)
             })
             
         index_path = self.data_dir / "index.json"
