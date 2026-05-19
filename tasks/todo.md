@@ -68,31 +68,46 @@ Gemini Flash LLM 智能标注、静态前端（彩虹风格）、GitHub Actions 
 - [x] D-2：实现 generator/meta_writer.py（写入 docs/data/meta.json，含时间戳和统计）
 - [x] D-3：实现 main.py（主入口，串行调用各模块）
 - [x] D-4：本地端到端测试（mock 数据验证输出 JSON 结构正确）
-- [ ] D-5：【requesting-code-review】后端代码 review（B+C+D 模块完成后触发）
+- [x] D-5：【requesting-code-review】后端代码 review（B+C+D 模块完成后触发）
 
 #### 🎨 Phase 1-E：前端（约2-3天）
-- [ ] E-1：创建 docs/index.html（骨架：Hero Banner + 左侧导航 + 主内容区）
-- [ ] E-2：【frontend-design skill】实现 docs/assets/style.css
+- [x] E-1：创建 docs/index.html（骨架：Hero Banner + 左侧导航 + 主内容区）
+- [x] E-2：【frontend-design skill】实现 docs/assets/style.css
   - CSS 变量系统（8种活动类型颜色 token）
   - Noto Sans SC + Nunito Google Fonts
   - 彩虹 Hero Banner 样式
   - 左侧固定导航栏（4视图图标）
   - 卡片组件（彩色边框 + 半透明底色 + hover 动画）
   - 移动端响应式（1/2/3列断点）
-- [ ] E-3：实现 docs/assets/app.js（核心逻辑）
+- [x] E-3：实现 docs/assets/app.js（核心逻辑）
   - 加载 index.json
   - 列表视图（Pinterest 瀑布流）
   - 按类型筛选 / 按区筛选 / 按费用筛选 / 按年龄筛选
   - 按需加载 events/YYYY-MM-DD.json（点击卡片时）
   - 用 marked.js 渲染摘要（§4.9 合规）
-- [ ] E-4：实现 docs/assets/calendar.js（日历视图）
-- [ ] E-5：实现按类型分组视图 + 按年龄分组视图
-- [ ] E-6：DatePicker 日期范围筛选器（默认：今天 + 未来30天）
-- [ ] E-7：【agent-browser】本地验证前端渲染（打开 docs/index.html，检查各视图）
-- [ ] E-8：【requesting-code-review】前端代码 review
+- [x] E-4：实现 docs/assets/calendar.js（日历视图）
+- [x] E-5：实现按类型分组视图 + 按年龄分组视图
+- [x] E-6：DatePicker 日期范围筛选器（默认：今天 + 未来30天）
+- [x] E-7：【agent-browser】本地验证前端渲染（打开 docs/index.html，检查各视图）
+- [x] E-8：【requesting-code-review】前端代码 review
+
+### ✅ 审查完成 (2026-05-19 14:55)
+
+**验证结果摘要**：
+- Ruff lint: N/A (本次仅前端代码)
+- Ruff format: N/A (本次仅前端代码)
+- Pytest: N/A (本次仅前端代码)
+- 场景验证: 3.5 ✅ (已通过 Agent-Browser 点击路径验证视图切换与 UI 渲染，无 Console 报错，且成功加载 Dummy Data 以渲染前端效果)
+- 高级工程师审查: 全部 ✅
+
+**实际改动文件**：
+- `docs/index.html`: 新增 Modal、Calendar 和 GroupView 的骨架及 DatePicker 筛选器。
+- `docs/assets/style.css`: 新增 Modal、Calendar 与 GroupView 样式，使用 CSS Token 完善彩虹主题。
+- `docs/assets/app.js`: 核心逻辑补全，修复 Fetch 失败未渲染 DatePicker 的 Bug，新增 Modal 按需加载 JSON 数据逻辑。
+- `docs/assets/calendar.js`: 新增独立的日历与分组视图渲染逻辑。
 
 #### 🚀 Phase 1-F：部署（约0.5天）
-- [ ] F-1：创建 .github/workflows/daily_update.yml（cron: '0 3 * * *' UTC = 12:00 JST）
+- [x] F-1：创建 .github/workflows/daily_update.yml（cron: '0 3 * * *' UTC = 12:00 JST）
 - [ ] F-2：在 GitHub 创建仓库（用户执行）
 - [ ] F-3：配置 GitHub Secrets（GOOGLE_APPLICATION_CREDENTIALS_JSON）
 - [ ] F-4：推送代码，开启 GitHub Pages（docs/ 目录作为根）

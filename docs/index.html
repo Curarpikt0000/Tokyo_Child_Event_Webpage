@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东京亲子活动地图 | Tokyo Child Event Explorer</title>
+    
+    <!-- Google Fonts: Noto Sans SC (zh) + Nunito (en/num) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-child-reaching"></i>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" title="瀑布流视图" data-view="list">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>列表</span>
+                </a>
+                <a href="#" class="nav-item" title="日历视图" data-view="calendar">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <span>日历</span>
+                </a>
+                <a href="#" class="nav-item" title="活动类型视图" data-view="type">
+                    <i class="fa-solid fa-shapes"></i>
+                    <span>类型</span>
+                </a>
+                <a href="#" class="nav-item" title="年龄视图" data-view="age">
+                    <i class="fa-solid fa-cake-candles"></i>
+                    <span>年龄</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Hero Banner -->
+            <header class="hero-banner">
+                <div class="hero-content">
+                    <h1>发现最棒的亲子时光</h1>
+                    <p>汇聚东京各地官方及精选儿童活动，给孩子一个充满色彩的周末</p>
+                    
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="search-input" placeholder="搜索活动名称、场地或关键词...">
+                    </div>
+                </div>
+                <div class="hero-decoration">
+                    <!-- Simple CSS-based geometric decorations for a playful feel -->
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </header>
+
+            <!-- Filters -->
+            <section class="filters-section">
+                <div class="filter-group">
+                    <label>活动类型</label>
+                    <div class="type-filters" id="type-filters">
+                        <button class="filter-btn type-all active" data-type="all">全部</button>
+                        <button class="filter-btn type-outdoor" data-type="outdoor">自然户外</button>
+                        <button class="filter-btn type-arts" data-type="arts">手工艺术</button>
+                        <button class="filter-btn type-science" data-type="science">科学体验</button>
+                        <button class="filter-btn type-sports" data-type="sports">运动竞技</button>
+                        <button class="filter-btn type-culture" data-type="culture">文化节庆</button>
+                        <button class="filter-btn type-nature" data-type="nature">自然农场</button>
+                        <button class="filter-btn type-museum" data-type="museum">博物展览</button>
+                        <button class="filter-btn type-performance" data-type="performance">演出舞台</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group secondary-filters">
+                    <div class="filter-select-wrapper">
+                        <i class="fa-regular fa-calendar"></i>
+                        <input type="date" id="date-start-filter" title="开始日期">
+                        <span style="color:#7F8C8D; margin:0 4px;">-</span>
+                        <input type="date" id="date-end-filter" title="结束日期">
+                    </div>
+
+                    <div class="filter-select-wrapper">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <select id="ward-filter">
+                            <option value="all">所有区域 (Wards)</option>
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    
+                    <div class="filter-select-wrapper">
+                        <i class="fa-solid fa-yen-sign"></i>
+                        <select id="price-filter">
+                            <option value="all">所有费用</option>
+                            <option value="free">完全免费</option>
+                            <option value="paid">需要付费</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-select-wrapper">
+                        <i class="fa-solid fa-baby"></i>
+                        <select id="age-filter">
+                            <option value="all">所有年龄</option>
+                            <option value="0-2">0-2岁 (婴幼儿)</option>
+                            <option value="3-5">3-5岁 (学龄前)</option>
+                            <option value="6-10">6-10岁 (小学生)</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dynamic Views Container -->
+            <div id="view-container">
+                <!-- List View (Masonry) -->
+                <div id="list-view" class="view-panel active">
+                    <div class="event-grid" id="event-grid">
+                        <!-- Event cards injected here by JS -->
+                    </div>
+                    <div class="loading-state" id="loading-state">
+                        <div class="spinner"></div>
+                        <p>正在寻找活动...</p>
+                    </div>
+                    <div class="empty-state" id="empty-state" style="display: none;">
+                        <i class="fa-regular fa-face-frown-open"></i>
+                        <p>哎呀，没有找到符合条件的活动</p>
+                        <button id="reset-filters">重置筛选</button>
+                    </div>
+                </div>
+                
+                <!-- Calendar View -->
+                <div id="calendar-view" class="view-panel" style="display: none;">
+                    <div id="calendar-container"></div>
+                </div>
+                
+                <!-- Type View -->
+                <div id="type-view" class="view-panel" style="display: none;">
+                    <div id="type-container"></div>
+                </div>
+                
+                <!-- Age View -->
+                <div id="age-view" class="view-panel" style="display: none;">
+                    <div id="age-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Event Detail Modal -->
+    <div id="event-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="assets/calendar.js"></script>
+    <script src="assets/app.js"></script>
+</body>
+</html>
