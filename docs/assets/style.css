@@ -473,19 +473,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 .modal-close:hover { background: #E2E8F0; color: #E91E63; }
 
-/* Masonry Event Grid */
+/* Equal Height Event Grid */
 .event-grid {
-    column-count: 1;
-    column-gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+    align-items: stretch;
 }
 
-@media (min-width: 768px) { .event-grid { column-count: 2; } }
-@media (min-width: 1024px) { .event-grid { column-count: 3; } }
-@media (min-width: 1440px) { .event-grid { column-count: 4; } }
+@media (min-width: 768px) { .event-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .event-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1440px) { .event-grid { grid-template-columns: repeat(4, 1fr); } }
 
 /* Event Card */
 .event-card {
-    break-inside: avoid;
+    height: 100%;
     background: white;
     border-radius: var(--card-radius);
     padding: var(--card-padding);

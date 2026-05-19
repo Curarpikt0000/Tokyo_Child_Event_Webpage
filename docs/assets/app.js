@@ -338,8 +338,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                     // Fallback to basic info if detail file missing
                     modalBody.innerHTML = `
                         <div class="card-tags" style="margin-bottom:12px;">${tagsHtml}</div>
-                        <h2 style="margin-bottom: 16px;">${event.title_zh || event.title_ja}</h2>
+                        <h2 style="margin-bottom: 16px; color: var(--text-dark);">${event.title_zh || event.title_ja}</h2>
+                        <div class="card-meta" style="margin-bottom: 24px; padding: 16px; background: #F8F9FA; border-radius: 12px;">
+                            <span><i class="fa-regular fa-clock"></i> ${event.date} ${event.time_start || ''} ${event.time_end ? '- '+event.time_end : ''}</span>
+                            <span><i class="fa-solid fa-location-dot"></i> ${event.ward || ''} ${event.venue || ''}</span>
+                        </div>
                         <div class="card-summary" style="font-size: 15px; line-height: 1.8; color: #333;">${summaryHtml}</div>
+                        ${event.source_url ? `<div style="margin-top: 32px; text-align: center;"><a href="${event.source_url}" target="_blank" style="display:inline-block; padding:12px 32px; background:var(--color-science); color:white; text-decoration:none; border-radius:100px; font-weight:600; box-shadow:0 4px 12px rgba(33, 150, 243, 0.3); transition: transform 0.2s;"><i class="fa-solid fa-arrow-up-right-from-square"></i> 查看官方活动详情</a></div>` : ''}
                     `;
                 }
             });
