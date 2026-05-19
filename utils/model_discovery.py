@@ -53,7 +53,7 @@ def _score_model(name: str) -> int:
 
     # 扣分项：不稳定版本
     if "preview" in name or "exp" in name:
-        score -= 500  # preview 版本扣分但不完全排除（作为最后选项）
+        score -= 10000  # 极大扣分，避免选到未上线的内测版（Vertex 中常有未开放的占位模型导致 404）
     if "lite" in name:
         score -= 200  # lite 版本轻量级，排在 flash 后
     if "8b" in name:
