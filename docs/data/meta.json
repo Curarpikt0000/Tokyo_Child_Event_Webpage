@@ -1,0 +1,14 @@
+{
+  "last_updated": "2026-05-19T06:29:33.225701",
+  "total_events": 52,
+  "statistics": {
+    "by_ward": {
+      "渋谷区": 15,
+      "新宿区": 22,
+      "東京都": 15
+    },
+    "by_type": {
+      "outdoor": 52
+    }
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "title_ja": "【coしぶや】5/24 日曜特別会： 渋谷区在住の多胎児とそ... 2026.05.15 更新 coしぶや",
+    "date": "2026-05-24",
+    "ward": "渋谷区",
+    "source_url": "https://shibuya-city-neuvola.tokyo/?p=16187",
+    "source_name": "渋谷区子育てネウボラ",
+    "source_type": "official",
+    "free": true,
+    "price": 0,
+    "title_zh": "【coしぶや】5/24 日曜特別会： 渋谷区在住の多胎児とそ... 2026.05.15 更新 coしぶや",
+    "age_min": 0,
+    "age_max": 10,
+    "type": "outdoor",
+    "score_reasoning": "处理失败，自动给予基础分",
+    "ai_score": 60,
+    "ai_tags": [],
+    "summary_zh": "无可用摘要",
+    "rain_ok": false,
+    "id": "evt_20260524_000"
+  },
+  {
+    "title_ja": "【coしぶや】5/24 日曜特別会： 渋谷区在住の多胎児とそ... 2026.04.30 更新 coしぶや",
+    "date": "2026-05-24",
+    "ward": "渋谷区",
+    "source_url": "https://shibuya-city-neuvola.tokyo/?p=16101",
+    "source_name": "渋谷区子育てネウボラ",
+    "source_type": "official",
+    "free": true,
+    "price": 0,
+    "title_zh": "【coしぶや】5/24 日曜特別会： 渋谷区在住の多胎児とそ... 2026.04.30 更新 coしぶや",
+    "age_min": 0,
+    "age_max": 10,
+    "type": "outdoor",
+    "score_reasoning": "处理失败，自动给予基础分",
+    "ai_score": 60,
+    "ai_tags": [],
+    "summary_zh": "无可用摘要",
+    "rain_ok": false,
+    "id": "evt_20260524_001"
+  }
+]
