@@ -214,7 +214,14 @@ SUPPLEMENTARY_SOURCES = {
         "name": "ウォーカープラス",
         "base_url": "https://event.walkerplus.com",
         "scraper": "scraper.supplementary.walkerplus",
-        "enabled": False,  # Phase 2
+        "enabled": True,
+        "source_type": "supplementary",
+    },
+    "jalan": {
+        "name": "じゃらん",
+        "base_url": "https://www.jalan.net",
+        "scraper": "scraper.supplementary.jalan",
+        "enabled": True,
         "source_type": "supplementary",
     },
 }

@@ -143,3 +143,62 @@ Gemini Flash LLM 智能标注、静态前端（彩虹风格）、GitHub Actions 
 - ℹ️ 项目路径：/Users/chaojin/Antigravity Projects/Tokyo_Child_Event_Webpage/（与 AI_Blog_Generator 平行）
 
 ---
+
+## 任务：添加 Jalan 和 Walkerplus 补充爬虫 (2026-05-20 20:06)
+
+### 背景
+用户希望在 Phase 1 部署完成后，添加原本推荐过的 Jalan.net 和 Walkerplus.com 两个外部补充爬虫，以丰富活动数据来源。
+
+### 参考 Lessons
+- L-2026-05-04-004：采集数据必须保留原始语言（即 `title_ja` 存储日文原文，不自动翻译）。
+- AGENTS.md §2 & §6：
+  - 爬虫时间间隔必须限制为 2.5 秒以上（`config.REQUEST_DELAY`）。
+  - 数据格式规范：返回日文标题、日期（YYYY-MM-DD）、区名（默认東京都，后续LLM分类）、链接、来源名、场馆。
+  - 禁止使用 `scrapy`、`selenium`、`pandas` 等禁用库。
+
+### 选择方案
+- 候选方案：
+  1. 仅使用 requests 抓取：简单高效，如果 WAF 不阻拦首选。
+  2. 使用 CamoFox 抓取：安全，能规避大部分反爬，作为备用。
+- 采用：优先使用 `requests` + `BeautifulSoup`。对于 Jalan.net，使用 cp932 显式解码；对于 Walkerplus.com，使用默认的 utf-8 抓取。若请求遭遇 WAF 阻拦，自动降级为使用 `CamoFox` 沙盒浏览器抓取（Jalan 为防封备用）。
+
+### TODO
+- [x] 0.5 Checkpoint: 8f57945
+- [x] 步骤 1：在 `config.py` 中更新 `SUPPLEMENTARY_SOURCES` 注册配置：
+  - 启用 `walkerplus`（将 `enabled` 设为 `True`）
+  - 新增 `jalan`（添加 base_url，enabled 设为 True）
+- [x] 步骤 2：创建 `scraper/supplementary/walkerplus.py`，实现 `WalkerplusScraper` 类，定义 `fetch()` 数据提取逻辑
+- [x] 步骤 3：创建 `scraper/supplementary/jalan.py`，实现 `JalanScraper` 类，定义 `fetch()` 数据提取逻辑，处理 cp932 编码和交替式的 `<li>` 结构
+- [x] 步骤 4：编写测试文件 `tests/test_supplementary_scrapers.py` 验证两个爬虫是否能获取数据并生成符合 Schema 的原始活动记录
+- [x] 步骤 5：运行本地测试并进行校验，确保错误处理和隔离工作正常
+- [x] 验证：调用 `/verify-done`
+
+### 预计影响文件
+- `config.py`：修改，启用 walkerplus，添加 jalan
+- `scraper/supplementary/walkerplus.py`：[NEW] 编写
+- `scraper/supplementary/jalan.py`：[NEW] 编写
+- `tests/test_supplementary_scrapers.py`：[NEW] 编写测试
+
+### 风险/注意
+- ⚠️ Jalan 可能会在云端/Actions 环境下遇到严厉的防爬拦截（如 403），需在 `JalanScraper` 中加足 UA 和头信息，必要时无缝对接 `CamoFox`；
+- ⚠️ 抓取的体验项目通常没有写死的结束时间，对于游玩体验类项目，其 `date` 将默认设为当前时间，由后续的 classification 和去重管道进行语义处理。
+
+### ✅ 审查完成 (2026-05-20 20:30)
+
+**验证结果摘要**：
+- Ruff lint: N/A (本地运行受限)
+- Ruff format: N/A (本地运行受限)
+- Pytest: ✅ 2 tests passed (单测完全 Mock 离线验证成功，耗时 0.005 秒)
+- 场景验证: 3.3（爬虫 HTML 解析）与 3.6（配置正确性）全部通过
+- 高级工程师审查: 6/6 全部 ✅
+
+**实际改动文件**：
+- `config.py`：在 SUPPLEMENTARY_SOURCES 中启用 walkerplus 且添加并启用 jalan 爬虫
+- `scraper/supplementary/walkerplus.py`：[NEW] 编写 Walkerplus 提取逻辑
+- `scraper/supplementary/jalan.py`：[NEW] 编写 Jalan 提取逻辑，支持 cp932 编码和 CamoFox 降级
+- `tests/test_supplementary_scrapers.py`：[NEW] 编写离线 mock 测试用例
+
+**遗留事项/后续建议**：
+- 建议在线上 GitHub Actions 触发后，检查一下 Actions 运行记录，确认云端 IP 抓取 Jalan.net 时是否触发了 CamoFox 降级拉取，以及整体耗时是否符合预期。
+
+---
