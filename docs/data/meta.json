@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-20T12:41:13.721871",
+  "last_updated": "2026-05-20T14:27:53.439093",
   "total_events": 128,
   "statistics": {
     "by_ward": {
@@ -12,12 +12,12 @@
       "豊島区": 2
     },
     "by_type": {
-      "culture": 97,
-      "science": 5,
+      "culture": 101,
       "arts": 17,
-      "performance": 1,
+      "science": 2,
+      "performance": 2,
       "nature": 3,
-      "sports": 3,
+      "sports": 1,
       "outdoor": 2
     }
   }
