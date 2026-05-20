@@ -33,12 +33,29 @@ class WalkerplusScraper(BaseScraper):
         url = f"{self.base_url}/event_list/ar0313/"
         logger.info(f"正在爬取 Walkerplus 列表: {url}")
 
-        resp = self.get(url)
-        if not resp:
-            logger.error("抓取 Walkerplus 页面失败")
-            return all_events
+        html_content = None
+        try:
+            resp = self.get(url)
+            if resp:
+                html_content = resp.content
+                logger.info("已成功通过 requests 获取 Walkerplus 页面")
+        except Exception as req_err:
+            logger.warning(f"Requests 抓取 Walkerplus 页面发生错误: {req_err}，准备降级为 CamoFox...")
 
-        soup = BeautifulSoup(resp.content, "lxml")
+        if not html_content:
+            logger.info("启动 CamoFox 引擎抓取 Walkerplus...")
+            try:
+                from camoufox.sync_api import Camoufox
+                with Camoufox(headless=True, geoip=True) as browser:
+                    page = browser.new_page()
+                    page.goto(url, wait_until="domcontentloaded")
+                    html_content = page.content()
+                    logger.info("已成功通过 CamoFox 获取 Walkerplus 页面内容")
+            except Exception as cam_err:
+                logger.error(f"CamoFox 最终抓取 Walkerplus 页面也失败: {cam_err}")
+                return all_events
+
+        soup = BeautifulSoup(html_content, "lxml")
         items = soup.find_all("div", class_="m-mainlist-item")
         logger.info(f"解析到 {len(items)} 个活动卡片")
 
