@@ -83,6 +83,9 @@ class JSONWriter:
             index_list.append({
                 "id": e["id"],
                 "date": e["date"],
+                "date_start": e.get("date_start", e["date"]),
+                "date_end": e.get("date_end", e["date"]),
+                "event_period": e.get("event_period", e["date"]),
                 "title_zh": e.get("title_zh", e.get("title_ja", "亲子活动")[:20]),
                 "type": e.get("type", "outdoor"),
                 "ward": e.get("ward", ""),
@@ -91,7 +94,9 @@ class JSONWriter:
                 "free": e.get("free", True),
                 "indoor": not e.get("rain_ok", True), # 依照 AGENTS.md 映射，或者直接映射 rain_ok -> indoor
                 "ai_score": e.get("ai_score", 3.0),
-                "image_url": e.get("image_url", None)
+                "image_url": e.get("image_url", None),
+                "source_url": e.get("source_url", ""),
+                "summary_zh": e.get("summary_zh", "")[:60] + "..." if len(e.get("summary_zh", "")) > 60 else e.get("summary_zh", "")
             })
             
         index_path = self.data_dir / "index.json"

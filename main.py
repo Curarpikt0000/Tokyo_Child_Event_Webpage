@@ -19,6 +19,7 @@ from generator.json_writer import JSONWriter
 from generator.meta_writer import MetaWriter
 from processor.cleaner import Cleaner
 from processor.llm_classifier import LLMClassifier
+from processor.image_enricher import ImageEnricher
 
 # 配置日志
 logging.basicConfig(
@@ -137,10 +138,14 @@ def run_pipeline() -> None:
     clean_events = Cleaner.deduplicate(all_raw_events)
     logger.info(f"清洗完成：{len(all_raw_events)} → {len(clean_events)} 条（去重 {len(all_raw_events) - len(clean_events)} 条）")
 
-    # ── 步骤 3：LLM 分类（串行，30条/批）────────────────
     logger.info("[步骤 4/5] LLM 分类（串行批处理）...")
     classifier = LLMClassifier()
     classified_events = classifier.process_all(clean_events)
+
+    # 4.5：图片补充（为无图活动获取 OG Image）
+    logger.info("[步骤 4.5/5] 图片补充...")
+    enricher = ImageEnricher()
+    classified_events = enricher.enrich(classified_events)
     logger.info(f"分类完成：{len(classified_events)} 条")
 
     # ── 步骤 4：输出 JSON 文件 ───────────────────────────

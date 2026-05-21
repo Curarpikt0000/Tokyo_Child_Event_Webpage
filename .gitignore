@@ -12,3 +12,7 @@ build/
 *.log
 *.json.bak
 # 不忽略 docs/data/ — 这些是 GitHub Pages 需要的静态文件
+
+# 忽视本地 GCP 凭证文件夹及 dump 文件
+credentials GCP service account/
+shibuya_dump.html

@@ -100,23 +100,31 @@
                     </div>
                     
                     <div class="filter-select-wrapper">
-                        <i class="fa-solid fa-yen-sign"></i>
-                        <select id="price-filter">
-                            <option value="all">所有费用</option>
-                            <option value="free">完全免费</option>
-                            <option value="paid">需要付费</option>
-                        </select>
-                    </div>
+                         <i class="fa-solid fa-yen-sign"></i>
+                         <select id="price-filter">
+                             <option value="all">所有费用</option>
+                             <option value="free">完全免费</option>
+                             <option value="1-1000">1-1000日元</option>
+                             <option value="1000-3000">1000-3000日元</option>
+                             <option value="3000+">3000日元以上</option>
+                         </select>
+                     </div>
 
-                    <div class="filter-select-wrapper">
-                        <i class="fa-solid fa-baby"></i>
-                        <select id="age-filter">
-                            <option value="all">所有年龄</option>
-                            <option value="0-2">0-2岁 (婴幼儿)</option>
-                            <option value="3-5">3-5岁 (学龄前)</option>
-                            <option value="6-10">6-10岁 (小学生)</option>
-                        </select>
-                    </div>
+                     <div class="filter-select-wrapper">
+                         <i class="fa-solid fa-baby"></i>
+                         <select id="age-filter">
+                             <option value="all">所有年龄</option>
+                             <option value="0-2">0-2岁 (婴幼儿)</option>
+                             <option value="3-5">3-5岁 (学龄前)</option>
+                             <option value="6-10">6-10岁 (小学生)</option>
+                         </select>
+                     </div>
+                     
+                     <div class="filter-slider-wrapper">
+                         <i class="fa-solid fa-star slider-star-icon"></i>
+                         <span class="slider-label">最低评分: <span id="score-val">30</span>分</span>
+                         <input type="range" id="score-filter" min="30" max="100" value="30" step="5">
+                     </div>
                 </div>
             </section>
 

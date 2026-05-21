@@ -1,0 +1,32 @@
+[
+  {
+    "title_ja": "としょかんのおはなし会",
+    "date": "2026-05-27",
+    "ward": "東京都",
+    "source_url": "https://iko-yo.net/event_lites/detail/20945",
+    "source_name": "いこーよ",
+    "source_type": "supplementary",
+    "free": true,
+    "price": 0,
+    "image_url": "",
+    "title_zh": "图书馆的故事会",
+    "age_min": 1,
+    "age_max": 6,
+    "type": "culture",
+    "score_reasoning": "教育：故事会能培养孩子的语言能力和阅读兴趣，非常有启发性（20/25）。趣味：通过绘本和表演吸引孩子，但互动性相对有限（15/25）。稀缺：这是图书馆的常规活动，非常普遍，稀缺性低（5/25）。友好：通常免费、室内、无需预约，对家长非常友好，提供了极大的便利（25/25）。",
+    "ai_score": 65,
+    "ai_tags": [
+      "免费",
+      "室内",
+      "亲子互动",
+      "无需预约"
+    ],
+    "summary_zh": "带娃去图书馆听故事咯！免费，还能从小培养阅读习惯，很适合小宝宝们，是周末溜娃的好去处。",
+    "rain_ok": true,
+    "indoor": false,
+    "date_start": "2026-05-27",
+    "date_end": "2026-05-27",
+    "event_period": "2026-05-27",
+    "id": "evt_20260527_000"
+  }
+]

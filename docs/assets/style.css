@@ -289,14 +289,31 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+.filter-btn.type-all { color: var(--text-dark); background: white; border-color: #E2E8F0; }
 .filter-btn.type-all.active { background: #333; color: white; }
+
+.filter-btn.type-outdoor { color: var(--color-outdoor); background: var(--color-outdoor-light); border-color: rgba(76, 175, 80, 0.2); }
 .filter-btn.type-outdoor.active { background: var(--color-outdoor); color: white; box-shadow: 0 4px 12px var(--color-outdoor-light); }
+
+.filter-btn.type-arts { color: var(--color-arts); background: var(--color-arts-light); border-color: rgba(156, 39, 176, 0.2); }
 .filter-btn.type-arts.active { background: var(--color-arts); color: white; box-shadow: 0 4px 12px var(--color-arts-light); }
+
+.filter-btn.type-science { color: var(--color-science); background: var(--color-science-light); border-color: rgba(33, 150, 243, 0.2); }
 .filter-btn.type-science.active { background: var(--color-science); color: white; box-shadow: 0 4px 12px var(--color-science-light); }
+
+.filter-btn.type-sports { color: var(--color-sports); background: var(--color-sports-light); border-color: rgba(255, 152, 0, 0.2); }
 .filter-btn.type-sports.active { background: var(--color-sports); color: white; box-shadow: 0 4px 12px var(--color-sports-light); }
+
+.filter-btn.type-culture { color: var(--color-culture); background: var(--color-culture-light); border-color: rgba(233, 30, 99, 0.2); }
 .filter-btn.type-culture.active { background: var(--color-culture); color: white; box-shadow: 0 4px 12px var(--color-culture-light); }
+
+.filter-btn.type-nature { color: var(--color-nature); background: var(--color-nature-light); border-color: rgba(0, 188, 212, 0.2); }
 .filter-btn.type-nature.active { background: var(--color-nature); color: white; box-shadow: 0 4px 12px var(--color-nature-light); }
+
+.filter-btn.type-museum { color: var(--color-museum); background: var(--color-museum-light); border-color: rgba(255, 87, 34, 0.2); }
 .filter-btn.type-museum.active { background: var(--color-museum); color: white; box-shadow: 0 4px 12px var(--color-museum-light); }
+
+.filter-btn.type-performance { color: var(--color-performance); background: var(--color-performance-light); border-color: rgba(255, 193, 7, 0.2); }
 .filter-btn.type-performance.active { background: var(--color-performance); color: white; box-shadow: 0 4px 12px var(--color-performance-light); }
 
 .secondary-filters {
@@ -687,3 +704,268 @@ h1, h2, h3, h4, h5, h6 {
     .secondary-filters { flex-direction: column; }
     .filter-select-wrapper select { width: 100%; }
 }
+
+/* Score Slider */
+.filter-slider-wrapper {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: 1px solid #E0E0E0;
+    gap: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    transition: var(--transition);
+    min-width: 280px;
+}
+.filter-slider-wrapper:focus-within {
+    border-color: var(--color-science);
+    box-shadow: 0 4px 12px var(--color-science-light);
+}
+.slider-star-icon {
+    color: #F57F17;
+    font-size: 16px;
+}
+.slider-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+    white-space: nowrap;
+}
+.filter-slider-wrapper input[type="range"] {
+    flex: 1;
+    appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    background: #E2E8F0;
+    outline: none;
+    cursor: pointer;
+}
+.filter-slider-wrapper input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-sports);
+    cursor: pointer;
+    transition: transform 0.1s;
+    box-shadow: 0 2px 6px rgba(255, 152, 0, 0.4);
+}
+.filter-slider-wrapper input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Month Calendar View Styles */
+.month-calendar-container {
+    background: white;
+    border-radius: var(--card-radius);
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.month-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #F1F3F5;
+    padding-bottom: 16px;
+}
+
+.month-calendar-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.month-calendar-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.month-calendar-nav-btn {
+    background: #F1F3F5;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+.month-calendar-nav-btn:hover {
+    background: var(--color-science-light);
+    color: var(--color-science);
+}
+
+.month-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.month-calendar-weekday {
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 8px 0;
+}
+
+.month-calendar-cell {
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    min-height: 110px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #FAFBFB;
+    transition: var(--transition);
+    position: relative;
+}
+
+.month-calendar-cell:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-color: var(--color-science);
+}
+
+.month-calendar-cell.current-month {
+    background: white;
+}
+
+.month-calendar-cell.other-month {
+    opacity: 0.3;
+}
+
+.month-calendar-cell.today {
+    border: 2px solid var(--color-science);
+    background: linear-gradient(to bottom right, var(--color-science-light), white);
+}
+
+.month-calendar-daynum {
+    font-family: var(--font-en);
+    font-weight: 700;
+    font-size: 13px;
+    color: #4A5568;
+    align-self: flex-end;
+}
+
+.month-calendar-cell.today .month-calendar-daynum {
+    color: var(--color-science);
+}
+
+.month-calendar-events {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+    max-height: 80px;
+}
+
+/* Event Pill in Calendar Cell */
+.month-calendar-event-pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: transform 0.1s;
+    border-left: 3px solid #ccc;
+    background: #F1F3F5;
+    color: #2D3748;
+}
+
+.month-calendar-event-pill:hover {
+    transform: scale(1.03);
+    filter: brightness(0.95);
+}
+
+.month-calendar-event-pill.type-outdoor { border-left-color: var(--color-outdoor); background: var(--color-outdoor-light); color: var(--color-outdoor); }
+.month-calendar-event-pill.type-arts { border-left-color: var(--color-arts); background: var(--color-arts-light); color: var(--color-arts); }
+.month-calendar-event-pill.type-science { border-left-color: var(--color-science); background: var(--color-science-light); color: var(--color-science); }
+.month-calendar-event-pill.type-sports { border-left-color: var(--color-sports); background: var(--color-sports-light); color: var(--color-sports); }
+.month-calendar-event-pill.type-culture { border-left-color: var(--color-culture); background: var(--color-culture-light); color: var(--color-culture); }
+.month-calendar-event-pill.type-nature { border-left-color: var(--color-nature); background: var(--color-nature-light); color: var(--color-nature); }
+.month-calendar-event-pill.type-museum { border-left-color: var(--color-museum); background: var(--color-museum-light); color: var(--color-museum); }
+.month-calendar-event-pill.type-performance { border-left-color: var(--color-performance); background: var(--color-performance-light); color: var(--color-performance); }
+
+/* Group List Hover and Interactive details */
+.group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #F8F9FA;
+    border-left: 4px solid #CBD5E1;
+    transition: var(--transition);
+}
+.group-item.type-outdoor { border-left-color: var(--color-outdoor); background: var(--color-outdoor-light); }
+.group-item.type-arts { border-left-color: var(--color-arts); background: var(--color-arts-light); }
+.group-item.type-science { border-left-color: var(--color-science); background: var(--color-science-light); }
+.group-item.type-sports { border-left-color: var(--color-sports); background: var(--color-sports-light); }
+.group-item.type-culture { border-left-color: var(--color-culture); background: var(--color-culture-light); }
+.group-item.type-nature { border-left-color: var(--color-nature); background: var(--color-nature-light); }
+.group-item.type-museum { border-left-color: var(--color-museum); background: var(--color-museum-light); }
+.group-item.type-performance { border-left-color: var(--color-performance); background: var(--color-performance-light); }
+
+.group-item:hover {
+    transform: translateX(4px);
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.group-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+}
+.group-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.group-item-date {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-en);
+}
+.group-link-btn {
+    color: var(--text-muted);
+    font-size: 13px;
+    transition: var(--transition);
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+}
+.group-link-btn:hover {
+    color: var(--color-science);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .filter-slider-wrapper { width: 100%; }
+    .month-calendar-cell { min-height: 70px; padding: 4px; }
+    .month-calendar-daynum { font-size: 11px; }
+    .month-calendar-event-pill { font-size: 9px; padding: 1px 3px; }
+}
+

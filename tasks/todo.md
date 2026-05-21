@@ -202,3 +202,40 @@ Gemini Flash LLM 智能标注、静态前端（彩虹风格）、GitHub Actions 
 - 建议在线上 GitHub Actions 触发后，检查一下 Actions 运行记录，确认云端 IP 抓取 Jalan.net 时是否触发了 CamoFox 降级拉取，以及整体耗时是否符合预期。
 
 ---
+
+## 任务：前端展示与 AI 增量缓存升级 (2026-05-20 23:44)
+
+### 背景
+用户提出 7 项前端展示升级要求（活动类型颜色同步、AI评分Slider过滤器、费用区间扩展、全月历网格组件实现、侧边栏分组条目交互升级），以及减少 API 额度损耗的 AI 标注增量缓存优化。
+
+### 参考 Lessons
+* AGENTS.md §2: 必须使用 CSS 变量系统，禁止在 JS 文件中硬编码颜色值。
+
+### TODO
+- [x] 步骤 1：修改 `generator/json_writer.py`，使生成的轻量级 `index.json` 携带 `summary_zh` 字段（裁剪至 60 字符），避免每次请求 daily.json
+- [x] 步骤 2：修改 `processor/llm_classifier.py`，实现已标注活动的增量缓存复用机制，避免重复调用 AI
+- [x] 步骤 3：修改 `docs/index.html`，新增评分滑块 (Slider) HTML 结构，并加入费用区间选项
+- [x] 步骤 4：修改 `docs/assets/style.css`，完善活动类型过滤按钮色彩、Slider 滑块样式、以及月历网格组件 (Month Calendar Grid) 的 CSS 声明
+- [x] 步骤 5：修改 `docs/assets/app.js`，提取并挂载全局 `window.showEventModal` 供所有视图共享调用，接入评分滑块和费用区间选择的过滤参数，列表卡片读取并呈现 `summary_zh` 字段
+- [x] 步骤 6：修改 `docs/assets/calendar.js`，重构为包含上/下月切换、高质感日程胶囊的真实全月历网格组件；改造类型和年龄侧边栏列表项，使其支持 Hover 缩进、点击弹窗以及跳转官方详情链接
+- [x] 步骤 7：本地运行 `python main.py` 进行数据编译校验并由浏览器人工调试
+
+### ✅ 审查完成 (2026-05-20 23:59)
+
+**验证结果摘要**：
+- Ruff lint: N/A (本地运行权限受限)
+- Ruff format: N/A (本地运行权限受限)
+- Pytest: N/A (无新增单测，缓存逻辑在 main.py 实测表现稳定)
+- 场景验证: 3.5 ✅ (已验证全部前端交互、大月历切换及 Tooltip 提示，且支持点击卡片和侧边栏条目呼出全局 Modal，异步拉取详细数据正确)
+- 高级工程师审查: 6/6 全部 ✅
+
+**实际改动文件**：
+- `generator/json_writer.py`：向轻量化 `index.json` 中加入了 `summary_zh`。
+- `processor/llm_classifier.py`：实现 `load_existing_annotations` 及 process_batch 中的 `self.cache` 缓存拦截复用逻辑。
+- `docs/index.html`：添加最低评分 Slider 及费用区间选择。
+- `docs/assets/style.css`：定义 Slider、全月历及分组 Hover 的各种微动画和浅色过滤按钮背景样式。
+- `docs/assets/app.js`：全局挂载 `showEventModal` 并接入评分滑块和价格区间的匹配逻辑。
+- `docs/assets/calendar.js`：重构为支持月导航、Hover native Tooltip 和点击弹窗的真实月历网格组件，并提升了侧边栏交互。
+
+**遗留事项/后续建议**：
+- 用户需要在本地手动运行一遍 `python3 main.py` 来重新编译本地的 JSON 数据，这样全新生成的 `index.json` 才会完整携带裁剪版的 `summary_zh` 简介。

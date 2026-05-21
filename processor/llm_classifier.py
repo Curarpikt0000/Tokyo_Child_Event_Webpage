@@ -10,6 +10,7 @@ import json
 import logging
 import time
 from typing import List
+from pathlib import Path
 
 from pydantic import BaseModel, Field
 from google import genai
@@ -30,6 +31,47 @@ class EventClassification(BaseModel):
     ai_tags: list[str] = Field(description="活动标签，如免费、室内、无需预约、亲子互动等，最多选4个")
     summary_zh: str = Field(description="中文简短摘要（50字以内），口语化，像当地妈妈的分享。")
     rain_ok: bool = Field(description="下雨天是否可参加")
+    date_start: str = Field(description="活动的举办开始日期，必须是 YYYY-MM-DD 格式。若未提及，默认为该活动的抓取日期。")
+    date_end: str = Field(description="活动的举办结束日期，必须是 YYYY-MM-DD 格式。如果活动仅在一日发生，则与 date_start 相同。")
+    event_period: str = Field(description="人类可读的活动时间段，如 '5月20日-6月15日 10:00-12:00'。必须从原文抽取。")
+
+def load_existing_annotations(events_dir: Path) -> dict:
+    """扫描 events 目录下的所有 YYYY-MM-DD.json，加载已有的 AI 标注结果"""
+    cache = {}
+    if not events_dir.exists():
+        return cache
+        
+    for json_file in events_dir.glob("*.json"):
+        try:
+            with open(json_file, "r", encoding="utf-8") as f:
+                events = json.load(f)
+                if not isinstance(events, list):
+                    continue
+                for e in events:
+                    url = e.get("source_url")
+                    # 必须保证有 source_url 且已被 AI 处理过
+                    if url and e.get("summary_zh") and e.get("summary_zh") != "无可用摘要":
+                        cache[url] = {
+                            "title_zh": e.get("title_zh"),
+                            "age_min": e.get("age_min"),
+                            "age_max": e.get("age_max"),
+                            "type": e.get("type"),
+                            "score_reasoning": e.get("score_reasoning", ""),
+                            "ai_score": e.get("ai_score"),
+                            "ai_tags": e.get("ai_tags", []),
+                            "summary_zh": e.get("summary_zh"),
+                            "rain_ok": e.get("rain_ok", False),
+                            "indoor": e.get("indoor", False),
+                            "date_start": e.get("date_start", e.get("date")),
+                            "date_end": e.get("date_end", e.get("date")),
+                            "event_period": e.get("event_period", e.get("date")),
+                        }
+        except Exception as err:
+            logger.warning(f"读取历史数据文件 {json_file} 失败: {err}")
+            
+    logger.info(f"成功从历史数据中加载了 {len(cache)} 条已标注的活动缓存")
+    return cache
+
 
 class LLMClassifier:
     def __init__(self):
@@ -51,9 +93,16 @@ class LLMClassifier:
             self.studio_client = genai.Client(api_key=config.AI_STUDIO_API_KEY)
         else:
             self.studio_client = None
+            
+        # 加载历史缓存
+        try:
+            self.cache = load_existing_annotations(Path(config.EVENTS_DIR))
+        except Exception as e:
+            logger.warning(f"加载 AI 历史缓存失败: {e}")
+            self.cache = {}
 
     def _build_prompt(self, event: dict) -> str:
-        """构建包含打分逻辑和人设规范的 Prompt"""
+        """构建包含打分逻辑和时间提取的 Prompt"""
         return f"""
 请扮演一位居住在东京多年的资深幼教兼两娃妈妈，为这个儿童活动进行分类和打分。
 
@@ -61,6 +110,11 @@ class LLMClassifier:
 - 标题: {event.get('title_ja')}
 - 来源: {event.get('source_name')}
 - 举办区: {event.get('ward')}
+- 默认抓取日期: {event.get('date')}
+
+【时间提取规则】
+1. 从日文标题和正文里分析活动的真实举办开始日期与结束日期，转换为 'YYYY-MM-DD' 格式，填入 `date_start` 和 `date_end`。结合活动年份上下文（默认为今年 2026 年）。如果原文中没有提及区间而只是一个单日，则两个字段都填默认抓取日期 {event.get('date')}。
+2. 提炼出一个简短、可读的活动时间范围文本放在 `event_period` 中，如“5月20日(周三)-6月15日(周一) 10:00-12:00”或“5月20日 13:00”。若实在没有时间范围，可以直接将默认抓取日期 {event.get('date')} 填入作为保底。
 
 【评分规则 (1-100分)】请严格按以下四个维度（各25分）进行累加：
 1. 教育与启发 (0-25分): 是否能学知识/锻炼技能。
@@ -79,6 +133,17 @@ class LLMClassifier:
         """处理一批数据（串行调用 LLM）"""
         results = []
         for event in batch:
+            url = event.get("source_url")
+            # 优先从已有的缓存数据复用标注结果
+            if url and url in self.cache:
+                for k, v in self.cache[url].items():
+                    if k == "image_url" and not v and event.get("image_url"):
+                        continue
+                    event[k] = v
+                logger.info(f"  → [缓存命中] 复用历史 AI 标注: {event.get('title_ja') or event.get('title_zh')}")
+                results.append(event)
+                continue
+                
             prompt = self._build_prompt(event)
             parsed_result = self._call_llm_with_fallback(prompt)
             
@@ -93,7 +158,10 @@ class LLMClassifier:
                     "age_min": 0, "age_max": 10, "type": "outdoor",
                     "score_reasoning": "处理失败，自动给予基础分",
                     "ai_score": 60, "ai_tags": [],
-                    "summary_zh": "无可用摘要", "rain_ok": False
+                    "summary_zh": "无可用摘要", "rain_ok": False,
+                    "date_start": event.get("date"),
+                    "date_end": event.get("date"),
+                    "event_period": event.get("date")
                 })
             results.append(event)
             # 依照规则，串行延迟
