@@ -143,10 +143,10 @@ WARD_SOURCES = {
     "港区": {
         "name_en": "minato",
         "base_url": "https://www.city.minato.tokyo.jp",
-        "events_path": "/kosodate/",
+        "events_path": "/kusei/koho/event/index.html",
         "scraper": "scraper.wards.minato",
         "enabled": True,
-        "js_required": False,
+        "js_required": True,   # 需要 CamoFox 渲染
     },
     "江東区": {
         "name_en": "koto",
@@ -223,6 +223,23 @@ SUPPLEMENTARY_SOURCES = {
         "scraper": "scraper.supplementary.jalan",
         "enabled": True,
         "source_type": "supplementary",
+    },
+    "enjoytokyo": {
+        "name": "レッツエンジョイ東京",
+        "base_url": "https://www.enjoytokyo.jp",
+        "list_path": "/feature/kids/event/",
+        "scraper": "scraper.supplementary.enjoytokyo",
+        "enabled": True,
+        "source_type": "supplementary",
+        # 覆盖港区芋浦祭り、Hills Spa、台場等东京全域亲子活动
+    },
+    "plarail": {
+        "name": "プラレール博 in TOKYO",
+        "base_url": "https://plarail-tokyo.com",
+        "scraper": "scraper.supplementary.plarail",
+        "enabled": True,
+        "source_type": "supplementary",
+        # 年度展覧型，例年 GW 前后在有明GYM-EX開催，2026年已结束。下居来年度公布前返回空列表
     },
 }
 
