@@ -459,5 +459,106 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
     
+    // ── 意见反馈逻辑 ───────────────────────────────────────
+    const feedbackTriggerBtn = document.getElementById('feedback-trigger-btn');
+    const feedbackModal = document.getElementById('feedback-modal');
+    const feedbackCloseBtn = document.getElementById('feedback-close-btn');
+    const feedbackForm = document.getElementById('feedback-form');
+    const feedbackSubmitBtn = document.getElementById('feedback-submit-btn');
+    const feedbackStatusMsg = document.getElementById('feedback-status-msg');
+
+    // 打开反馈弹窗
+    if (feedbackTriggerBtn && feedbackModal) {
+        feedbackTriggerBtn.addEventListener('click', () => {
+            feedbackModal.style.display = 'flex';
+            if (feedbackStatusMsg) feedbackStatusMsg.style.display = 'none';
+            feedbackForm.reset();
+        });
+    }
+
+    // 关闭反馈弹窗
+    if (feedbackCloseBtn && feedbackModal) {
+        feedbackCloseBtn.addEventListener('click', () => {
+            feedbackModal.style.display = 'none';
+        });
+    }
+
+    // 点击弹窗外部关闭
+    window.addEventListener('click', (e) => {
+        if (feedbackModal && e.target === feedbackModal) {
+            feedbackModal.style.display = 'none';
+        }
+    });
+
+    // 提交反馈表单 (AJAX 提交至 FormSubmit.co)
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('feedback-email');
+            const messageInput = document.getElementById('feedback-message');
+            
+            const data = {
+                email: emailInput ? emailInput.value : '',
+                message: messageInput ? messageInput.value : '',
+                _subject: "【东京亲子活动地图】用户意见反馈",
+                _honey: feedbackForm.querySelector('input[name="_honey"]').value
+            };
+
+            const originalBtnHtml = feedbackSubmitBtn.innerHTML;
+            feedbackSubmitBtn.classList.add('feedback-btn-loading');
+            feedbackSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在发送...';
+            
+            if (feedbackStatusMsg) {
+                feedbackStatusMsg.style.display = 'none';
+            }
+
+            try {
+                const response = await fetch("https://formsubmit.co/ajax/curarpikt00@gmail.com", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success === "true") {
+                    if (feedbackStatusMsg) {
+                        feedbackStatusMsg.className = "feedback-status-msg";
+                        feedbackStatusMsg.style.color = "#2F855A";
+                        feedbackStatusMsg.style.background = "#C6F6D5";
+                        feedbackStatusMsg.style.border = "1px solid #9AE6B4";
+                        feedbackStatusMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> 提交成功！感谢您的反馈！';
+                        feedbackStatusMsg.style.display = 'block';
+                    }
+                    
+                    feedbackForm.reset();
+                    
+                    setTimeout(() => {
+                        feedbackModal.style.display = 'none';
+                    }, 1500);
+                } else {
+                    throw new Error(result.message || '发送失败');
+                }
+            } catch (err) {
+                console.error("提交反馈错误:", err);
+                if (feedbackStatusMsg) {
+                    feedbackStatusMsg.className = "feedback-status-msg";
+                    feedbackStatusMsg.style.color = "#9B2C2C";
+                    feedbackStatusMsg.style.background = "#FED7D7";
+                    feedbackStatusMsg.style.border = "1px solid #FEB2B2";
+                    feedbackStatusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> 提交失败，请稍后重试或直接发送至 curarpikt00@gmail.com';
+                    feedbackStatusMsg.style.display = 'block';
+                }
+            } finally {
+                feedbackSubmitBtn.classList.remove('feedback-btn-loading');
+                feedbackSubmitBtn.innerHTML = originalBtnHtml;
+            }
+        });
+    }
+    
     init();
 });

@@ -962,10 +962,76 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1.1);
 }
 
+/* Feedback Floating Action Button */
+.feedback-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    background: linear-gradient(135deg, var(--color-science) 0%, #1976D2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(33, 150, 243, 0.35);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-fab i {
+    font-size: 16px;
+}
+
+.feedback-fab span {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: max-width 0.4s ease, opacity 0.3s ease;
+}
+
+.feedback-fab:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(33, 150, 243, 0.45);
+    background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+}
+
+.feedback-modal-content {
+    max-width: 450px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feedback-modal-content input:focus,
+.feedback-modal-content textarea:focus {
+    border-color: var(--color-science) !important;
+    box-shadow: 0 0 0 3px var(--color-science-light);
+}
+
+/* Submit loading state */
+.feedback-btn-loading {
+    background: #A0AEC0 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
 @media (max-width: 768px) {
     .filter-slider-wrapper { width: 100%; }
     .month-calendar-cell { min-height: 70px; padding: 4px; }
     .month-calendar-daynum { font-size: 11px; }
     .month-calendar-event-pill { font-size: 9px; padding: 1px 3px; }
+    
+    .feedback-fab {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px;
+        border-radius: 50%;
+    }
+    .feedback-fab span {
+        display: none;
+    }
 }
 
