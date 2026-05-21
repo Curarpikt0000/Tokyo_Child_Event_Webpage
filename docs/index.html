@@ -190,7 +190,9 @@
             </h3>
             <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">您的建议对我们非常宝贵，我们会根据您的反馈不断优化网站功能！</p>
             
-            <form id="feedback-form">
+            <form id="feedback-form" action="https://formsubmit.co/curarpikt00@gmail.com" method="POST">
+                <!-- 提交成功后重定向回原网站 -->
+                <input type="hidden" name="_next" value="https://curarpikt0000.github.io/Tokyo_Child_Event_Webpage/">
                 <!-- 避免 FormSubmit 机器人滥用验证 -->
                 <input type="text" name="_honey" style="display:none">
                 <!-- 自定义发送邮件的主题 -->
