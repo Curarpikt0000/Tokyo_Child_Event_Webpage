@@ -334,12 +334,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (event.ai_score !== undefined && event.ai_score !== null) {
                 tagsHtml += `<span class="tag tag-score" style="background:#FFF9C4; color:#F57F17; font-weight:700;"><i class="fa-solid fa-star" style="color:#F57F17;"></i> ${parseFloat(event.ai_score).toFixed(1)}</span>`;
             }
-            
+
             // Date formatting
             const dateStr = formatEventDate(event.date_start, event.date_end, event.event_period || event.date);
-            
-            const summaryHtml = event.summary_zh ? md(event.summary_zh) : '<p>暂无详细介绍</p>';
-            
+
             // Image formatting
             let imgHtml = '';
             if (event.image_url) {
@@ -349,7 +347,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 `;
             }
-            
+
             card.innerHTML = `
                 ${imgHtml}
                 <div class="card-body">
@@ -361,9 +359,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="card-meta">
                         ${event.ward || event.venue ? `<span><i class="fa-solid fa-location-dot"></i> ${event.ward || ''} ${event.venue || ''}</span>` : ''}
                         ${event.time_start ? `<span><i class="fa-regular fa-clock"></i> ${event.time_start}${event.time_end ? ' - ' + event.time_end : ''}</span>` : ''}
-                    </div>
-                    <div class="card-summary">
-                        ${summaryHtml}
                     </div>
                 </div>
             `;

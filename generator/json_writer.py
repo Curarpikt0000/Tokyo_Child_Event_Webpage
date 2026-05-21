@@ -96,7 +96,6 @@ class JSONWriter:
                 "ai_score": e.get("ai_score", 3.0),
                 "image_url": e.get("image_url", None),
                 "source_url": e.get("source_url", ""),
-                "summary_zh": e.get("summary_zh", "")[:60] + "..." if len(e.get("summary_zh", "")) > 60 else e.get("summary_zh", "")
             })
             
         index_path = self.data_dir / "index.json"

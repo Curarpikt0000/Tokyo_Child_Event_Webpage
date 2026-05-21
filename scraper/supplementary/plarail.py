@@ -86,19 +86,31 @@ class PlarailScraper(BaseScraper):
 
             logger.info(f"プラレール博: 开催期間 {start_date}〜{end_date}, 会場={venue}")
 
-            return [{
-                "title_ja": title,
-                "date": start_date,
-                "date_end": end_date,
-                "ward": "江東区",   # 有明 GYM-EX 位于江東区有明
-                "venue": venue,
-                "source_url": self.base_url,
-                "source_name": "プラレール博公式",
-                "source_type": "supplementary",
-                "free": free,
-                "price": price,
-                "image_url": self._extract_og_image(soup),
-            }]
+            from datetime import timedelta
+            start_dt = datetime.strptime(start_date, "%Y-%m-%d")
+            end_dt = datetime.strptime(end_date, "%Y-%m-%d")
+
+            events = []
+            curr_dt = start_dt
+            while curr_dt <= end_dt:
+                events.append({
+                    "title_ja": title,
+                    "date": curr_dt.strftime("%Y-%m-%d"),
+                    "date_start": start_date,
+                    "date_end": end_date,
+                    "ward": "江東区",   # 有明 GYM-EX 位于江東区有明
+                    "venue": venue,
+                    "source_url": self.base_url,
+                    "source_name": "プラレール博公式",
+                    "source_type": "supplementary",
+                    "free": free,
+                    "price": price,
+                    "image_url": self._extract_og_image(soup),
+                })
+                curr_dt += timedelta(days=1)
+
+            logger.info(f"プラレール博: 成功展开为 {len(events)} 天的日历事件")
+            return events
 
         except Exception as e:
             logger.error(f"プラレール博爬虫异常: {e}")
