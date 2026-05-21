@@ -16,7 +16,7 @@
     <!-- Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style.css?v=20260521_3">
 </head>
 <body>
     <div class="app-container">
@@ -68,23 +68,26 @@
 
             <!-- Filters -->
             <section class="filters-section">
-                <div class="filter-group">
-                    <label>活动类型</label>
-                    <div class="type-filters" id="type-filters">
-                        <button class="filter-btn type-all active" data-type="all">全部</button>
-                        <button class="filter-btn type-outdoor" data-type="outdoor">自然户外</button>
-                        <button class="filter-btn type-arts" data-type="arts">手工艺术</button>
-                        <button class="filter-btn type-science" data-type="science">科学体验</button>
-                        <button class="filter-btn type-sports" data-type="sports">运动竞技</button>
-                        <button class="filter-btn type-culture" data-type="culture">文化节庆</button>
-                        <button class="filter-btn type-nature" data-type="nature">自然农场</button>
-                        <button class="filter-btn type-museum" data-type="museum">博物展览</button>
-                        <button class="filter-btn type-performance" data-type="performance">演出舞台</button>
-                        <button id="feedback-trigger-btn" class="feedback-inline-btn" title="填写反馈意见">
-                            <i class="fa-solid fa-comment-dots"></i>
-                            <span>意见反馈</span>
-                        </button>
+                <div class="filter-group" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; width: 100%;">
+                    <div style="flex: 1; min-width: 280px;">
+                        <label>活动类型</label>
+                        <div class="type-filters" id="type-filters">
+                            <button class="filter-btn type-all active" data-type="all">全部</button>
+                            <button class="filter-btn type-outdoor" data-type="outdoor">自然户外</button>
+                            <button class="filter-btn type-arts" data-type="arts">手工艺术</button>
+                            <button class="filter-btn type-science" data-type="science">科学体验</button>
+                            <button class="filter-btn type-sports" data-type="sports">运动竞技</button>
+                            <button class="filter-btn type-culture" data-type="culture">文化节庆</button>
+                            <button class="filter-btn type-nature" data-type="nature">自然农场</button>
+                            <button class="filter-btn type-museum" data-type="museum">博物展览</button>
+                            <button class="filter-btn type-performance" data-type="performance">演出舞台</button>
+                        </div>
                     </div>
+                    
+                    <button id="feedback-trigger-btn" class="feedback-inline-btn" title="填写反馈意见">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <span>意见反馈</span>
+                    </button>
                 </div>
                 
                 <div class="filter-group secondary-filters">
@@ -212,7 +215,7 @@
         </div>
     </div>
 
-    <script src="assets/calendar.js"></script>
-    <script src="assets/app.js"></script>
+    <script src="assets/calendar.js?v=20260521_3"></script>
+    <script src="assets/app.js?v=20260521_3"></script>
 </body>
 </html>
