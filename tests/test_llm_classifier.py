@@ -38,7 +38,10 @@ class TestLLMClassifier(unittest.TestCase):
             ai_score=70,
             ai_tags=["免费", "室内", "亲子互动"],
             summary_zh="和孩子一起做手工的亲子教室，非常有意思哦。",
-            rain_ok=True
+            rain_ok=True,
+            date_start="2026-06-01",
+            date_end="2026-06-01",
+            event_period="2026-06-01 10:00-11:00"
         )
         self.classifier.vertex_client.models.generate_content.return_value = mock_response
         

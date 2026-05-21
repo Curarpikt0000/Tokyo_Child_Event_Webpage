@@ -239,3 +239,28 @@ Gemini Flash LLM 智能标注、静态前端（彩虹风格）、GitHub Actions 
 
 **遗留事项/后续建议**：
 - 用户需要在本地手动运行一遍 `python3 main.py` 来重新编译本地的 JSON 数据，这样全新生成的 `index.json` 才会完整携带裁剪版的 `summary_zh` 简介。
+
+---
+
+## 任务：新增港区/EnjoyTokyo/Plarail 爬虫及 Code Review 缺陷修复与懒加载优化 (2026-05-21)
+
+### 背景
+用户希望扩大爬虫范围，将港区官网（三田、芝浦附近）、EnjoyTokyo活动聚合站、以及台场普拉轨（plarail-tokyo.com）活动加入监控，并通过 Code Review 进行合规性与健壮性校验。
+
+### 参考 Lessons
+- L-2026-05-04-004：数据采集语言保留原文。
+- AGENTS.md §2: 必须在每次请求前检查 robots.txt，保持请求延迟限速。
+- AGENTS.md §5: 禁止硬编码，保证错误隔离与合规。
+
+### TODO
+- [x] 步骤 1：在 `config.py` 中注册 `enjoytokyo`、`plarail` 和 `minato` 爬虫。
+- [x] 步骤 2：创建 `scraper/wards/minato.py` 并实现港区官网活动解析。
+- [x] 步骤 3：创建 `scraper/supplementary/enjoytokyo.py` 抓取 EnjoyTokyo 活动。
+- [x] 步骤 4：创建 `scraper/supplementary/plarail.py` 抓取 Plarail 台场博览会活动，使用 `timedelta` 循环按日展开持续多天的活动。
+- [x] 步骤 5：发起首次 Code Review，定位 robots.txt 检查缺失、限速丢失、CamoFox GeoIP 超时和解析异常未捕获等隐患。
+- [x] 步骤 6：修复 Code Review 中的全部 🔴 Critical 和 🟡 Important 问题（包含 robots 校验、限速、GeoIP 移除、解析 isolation、以及对 index.json 移除 summary 并在前端 app.js 进行懒加载重构以瘦身 index.json 的性能问题）。
+- [x] 步骤 7：通过 `code-reviewer` 进行二次复审并获得 PASS 结论。
+- [x] 步骤 8：运行本地 `main.py` 跑通全管道编译测试。
+- [x] 步骤 9：修复 `tests/test_llm_classifier.py` 中因 Pydantic schema 字段变更导致的单测报错，运行 unittest 单元测试全部通过。
+- [x] 步骤 10：执行 `/verify-done` 验证并归档。
+- [ ] 步骤 11：将本地已 commit 的改动推送到 GitHub 远程仓库。
