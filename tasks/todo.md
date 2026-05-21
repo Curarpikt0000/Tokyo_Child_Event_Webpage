@@ -263,4 +263,23 @@ Gemini Flash LLM 智能标注、静态前端（彩虹风格）、GitHub Actions 
 - [x] 步骤 8：运行本地 `main.py` 跑通全管道编译测试。
 - [x] 步骤 9：修复 `tests/test_llm_classifier.py` 中因 Pydantic schema 字段变更导致的单测报错，运行 unittest 单元测试全部通过。
 - [x] 步骤 10：执行 `/verify-done` 验证并归档。
-- [ ] 步骤 11：将本地已 commit 的改动推送到 GitHub 远程仓库。
+- [x] 步骤 11：将本地已 commit 的改动推送到 GitHub 远程仓库。
+
+### ✅ 审查完成 (2026-05-21 22:40)
+
+**验证结果摘要**：
+- Ruff lint: N/A (本地未安装)
+- Ruff format: N/A (本地未安装)
+- Pytest: ✅ 8 tests passed (全部 unittest 单元测试正常通过)
+- 场景验证: 3.3 (已通过 requests + 缓存/LLM 模块完成本地数据全管道编译，生成了合规的轻量化 `index.json` 和 `events/YYYY-MM-DD.json` 日期详情数据)；3.5 (已验证前端懒加载交互，在 Modal 呼出时按需异步 fetch 详情 JSON，显示正常且无 Console 报错)
+- 高级工程师审查: 6/6 全部 ✅
+
+**实际改动文件**：
+- `scraper/wards/minato.py`: 增加 robots 校验与限速延迟，GeoIP 置 False，强化 DOM 解析异常处理（1 个文件）
+- `scraper/supplementary/enjoytokyo.py`: 增加 robots 校验与限速延迟，GeoIP 置 False，地名异常兜底（1 个文件）
+- `scraper/supplementary/plarail.py`: 使用日期循环展开多天博览会活动为每日独立的日历事件（1 个文件）
+- `generator/json_writer.py`: 从 `index.json` 移除 `summary_zh` 优化文件体积性能（1 个文件）
+- `docs/assets/app.js`: 改为懒加载异步拉取对应日期的 `events/YYYY-MM-DD.json` 获取 `summary_zh` 并做容错处理（1 个文件）
+- `tests/test_llm_classifier.py`: 补齐 `EventClassification` 模型新增的 date 字段，修复单元测试（1 个文件）
+- `tasks/todo.md`: 更新任务清单与验证完成记录（1 个文件）
+
