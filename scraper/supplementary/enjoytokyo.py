@@ -158,6 +158,7 @@ class EnjoyTokyoScraper(BaseScraper):
         if m:
             month, day = int(m.group(1)), int(m.group(2))
             year = datetime.now().year
+            # 如果解析出的日期已过，且在当年最后两个月，可能是下一年
             if month < datetime.now().month - 2:
                 year += 1
             return f"{year}-{month:02d}-{day:02d}"
@@ -166,9 +167,9 @@ class EnjoyTokyoScraper(BaseScraper):
     def _guess_ward(self, text: str) -> str:
         """从文本中推断所属区"""
         ward_map = {
-            "港区": ["港区", "芝浦", "三田", "六本木", "麻布", "白金", "虎ノ門", "赤坂", "台场"],
+            "港区": ["港区", "芝浦", "三田", "六本木", "麻布", "白金", "虎ノ門", "赤坂", "台場"],
             "渋谷区": ["渋谷", "代官山", "恵比寿", "代々木"],
-            "新宿区": ["新宿", "高田马场", "四谷"],
+            "新宿区": ["新宿", "高田馬場", "四谷"],
             "江東区": ["江東区", "有明", "豊洲", "深川", "木場", "東陽"],
             "中央区": ["中央区", "銀座", "築地", "日本橋"],
             "千代田区": ["千代田区", "丸の内", "神保町", "秋葉原"],

@@ -94,7 +94,6 @@ class JSONWriter:
                 "free": e.get("free", True),
                 "indoor": not e.get("rain_ok", True), # 依照 AGENTS.md 映射，或者直接映射 rain_ok -> indoor
                 "ai_score": e.get("ai_score", 3.0),
-                "image_url": e.get("image_url", None),
                 "source_url": e.get("source_url", ""),
             })
             
