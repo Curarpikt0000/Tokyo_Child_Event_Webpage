@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-22T09:18:04.613091",
+  "last_updated": "2026-05-22T09:30:17.502653",
   "total_events": 117,
   "statistics": {
     "by_ward": {
@@ -12,10 +12,11 @@
     },
     "by_type": {
       "culture": 88,
-      "arts": 17,
+      "arts": 18,
       "science": 3,
       "performance": 4,
-      "sports": 3,
+      "sports": 1,
+      "museum": 1,
       "nature": 2
     }
   }

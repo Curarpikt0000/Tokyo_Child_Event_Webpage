@@ -92,7 +92,7 @@ class JSONWriter:
                 "age_min": e.get("age_min", 0),
                 "age_max": e.get("age_max", 10),
                 "free": e.get("free", True),
-                "indoor": not e.get("rain_ok", True), # 依照 AGENTS.md 映射，或者直接映射 rain_ok -> indoor
+                "indoor": e.get("rain_ok", False),
                 "ai_score": e.get("ai_score", 3.0),
                 "source_url": e.get("source_url", ""),
             })

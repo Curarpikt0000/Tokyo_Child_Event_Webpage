@@ -11,7 +11,8 @@ import json
 import logging
 import time
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
+import urllib.robotparser
 
 import requests
 from bs4 import BeautifulSoup
@@ -33,6 +34,7 @@ class ImageEnricher:
             "Accept-Language": "ja,en;q=0.9",
         })
         self._last_request_time = 0.0
+        self._robots_cache = {}
 
     def _load_cache(self) -> dict:
         """加载持久化图片 URL 缓存（key: source_url, value: image_url or ""）"""
@@ -55,6 +57,37 @@ class ImageEnricher:
         except Exception as e:
             logger.warning(f"[图片] 缓存保存失败：{e}")
 
+    def _can_fetch(self, url: str) -> bool:
+        """检查 URL 是否允许爬取，基于域名 robots.txt 缓存"""
+        try:
+            parsed_url = urlparse(url)
+            domain = f"{parsed_url.scheme}://{parsed_url.netloc}"
+            
+            if domain not in self._robots_cache:
+                robots_url = urljoin(domain, "/robots.txt")
+                rp = urllib.robotparser.RobotFileParser()
+                try:
+                    # 使用 Session 发送请求，复用 UA 并设置超时，避免挂死进程
+                    resp = self.session.get(robots_url, timeout=5)
+                    if resp.status_code == 200:
+                        rp.parse(resp.text.splitlines())
+                        self._robots_cache[domain] = rp
+                        logger.debug(f"[图片] 已缓存 robots.txt：{robots_url}")
+                    else:
+                        logger.debug(f"[图片] 状态码异常 {resp.status_code}，默认允许：{robots_url}")
+                        self._robots_cache[domain] = None
+                except Exception as e:
+                    logger.warning(f"[图片] 无法读取 robots.txt ({robots_url})，默认允许：{e}")
+                    self._robots_cache[domain] = None
+            
+            rp = self._robots_cache[domain]
+            if rp is None:
+                return True
+            return rp.can_fetch(config.USER_AGENT, url)
+        except Exception as e:
+            logger.warning(f"[图片] robots.txt 校验异常，默认允许 {url}：{e}")
+            return True
+
     def _throttle(self) -> None:
         """遵守 ≥2 秒的请求间隔"""
         elapsed = time.time() - self._last_request_time
@@ -68,6 +101,10 @@ class ImageEnricher:
         若无 og:image，尝试 twitter:image 或页面首张大图。
         返回图片 URL 字符串，失败返回空字符串。
         """
+        if not self._can_fetch(url):
+            logger.warning(f"[图片] robots.txt 规则限制，跳过抓取：{url}")
+            return ""
+
         self._throttle()
         try:
             resp = self.session.get(url, timeout=10, allow_redirects=True)

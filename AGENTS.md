@@ -105,6 +105,11 @@ Tokyo_Child_Event_Webpage/
     "age_max": int,     # 最高适宜年龄（0-10）
     "free": bool,       # 是否免费
     "indoor": bool,     # 是否室内
+    "date_start": str,  # 活动开始日期 "YYYY-MM-DD"（供跨天日历及筛选使用）
+    "date_end": str,    # 活动结束日期 "YYYY-MM-DD"（供跨天日历及筛选使用）
+    "event_period": str,# 活动跨度说明文本
+    "ai_score": float,  # AI 推荐评分（1.0-5.0，供前端评分筛选器使用）
+    "source_url": str,  # 原始链接（供前端 Modal 异步详情加载定位及外部跳转）
 }
 ```
 

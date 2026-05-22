@@ -329,10 +329,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 tagsHtml += `<span class="tag tag-type">${typeMap[event.type]}</span>`;
             }
             if (event.indoor) {
-                tagsHtml += `<span class="tag tag-type" style="background:#E3F2FD; color:#1565C0;">室内</span>`;
+                tagsHtml += `<span class="tag tag-indoor">室内</span>`;
             }
             if (event.ai_score !== undefined && event.ai_score !== null) {
-                tagsHtml += `<span class="tag tag-score" style="background:#FFF9C4; color:#F57F17; font-weight:700;"><i class="fa-solid fa-star" style="color:#F57F17;"></i> ${parseFloat(event.ai_score).toFixed(1)}</span>`;
+                tagsHtml += `<span class="tag tag-score"><i class="fa-solid fa-star"></i> ${parseFloat(event.ai_score).toFixed(1)}</span>`;
             }
 
             // Date formatting
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!modal || !modalBody) return;
         
         modal.style.display = 'flex';
-        modalBody.innerHTML = '<div class="spinner"></div><p style="text-align:center;">加载详情中...</p>';
+        modalBody.innerHTML = '<div class="spinner"></div><p class="modal-loading-text">加载详情中...</p>';
         
         // Tags HTML
         let tagsHtml = '';
@@ -393,10 +393,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             tagsHtml += `<span class="tag tag-type">${typeMap[event.type]}</span>`;
         }
         if (event.indoor) {
-            tagsHtml += `<span class="tag tag-type" style="background:#E3F2FD; color:#1565C0;">室内</span>`;
+            tagsHtml += `<span class="tag tag-indoor">室内</span>`;
         }
         if (event.ai_score !== undefined && event.ai_score !== null) {
-            tagsHtml += `<span class="tag tag-score" style="background:#FFF9C4; color:#F57F17; font-weight:700;"><i class="fa-solid fa-star" style="color:#F57F17;"></i> ${parseFloat(event.ai_score).toFixed(1)}</span>`;
+            tagsHtml += `<span class="tag tag-score"><i class="fa-solid fa-star"></i> ${parseFloat(event.ai_score).toFixed(1)}</span>`;
         }
         
         const md = window.marked ? window.marked.parse : (text) => `<p>${text}</p>`;
@@ -412,44 +412,44 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             modalBody.innerHTML = `
                 ${detail.image_url ? `
-                <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; width: 100%; max-height: 280px; display: flex; justify-content: center; align-items: center; background: #f1f3f5; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);">
-                    <img src="${detail.image_url}" alt="${detail.title_zh || '活动图片'}" style="width: 100%; height: auto; max-height: 280px; object-fit: cover;" onerror="this.parentElement.style.display='none';">
+                <div class="modal-image-container">
+                    <img src="${detail.image_url}" alt="${detail.title_zh || '活动图片'}" class="modal-image" onerror="this.parentElement.style.display='none';">
                 </div>
                 ` : ''}
-                <div class="card-tags" style="margin-bottom:12px;">${tagsHtml}</div>
-                <h2 style="margin-bottom: 8px; color: var(--text-dark);">${detail.title_zh || detail.title_ja}</h2>
-                ${detail.title_ja && detail.title_zh !== detail.title_ja ? `<p style="color:var(--text-muted); margin-bottom:16px; font-size:14px;">${detail.title_ja}</p>` : ''}
+                <div class="card-tags modal-tags">${tagsHtml}</div>
+                <h2 class="modal-title">${detail.title_zh || detail.title_ja}</h2>
+                ${detail.title_ja && detail.title_zh !== detail.title_ja ? `<p class="modal-subtitle">${detail.title_ja}</p>` : ''}
                 
-                <div class="card-meta" style="margin-bottom: 24px; padding: 16px; background: #F8F9FA; border-radius: 12px;">
+                <div class="card-meta modal-meta-container">
                     <span><i class="fa-regular fa-clock"></i> ${finalPeriod} ${detail.time_start || ''} ${detail.time_end ? '- '+detail.time_end : ''}</span>
                     <span><i class="fa-solid fa-location-dot"></i> ${detail.ward || ''} ${detail.venue || ''}</span>
                     ${detail.address ? `<span><i class="fa-solid fa-map-pin"></i> ${detail.address}</span>` : ''}
                     ${detail.price !== undefined ? `<span><i class="fa-solid fa-yen-sign"></i> ${detail.price === 0 ? '免费' : detail.price + ' 日元'}</span>` : ''}
                 </div>
                 
-                <div class="card-summary" style="font-size: 15px; line-height: 1.8; color: #333;">
+                <div class="card-summary modal-summary">
                     ${detail.summary_zh ? md(detail.summary_zh) : md(event.summary_zh || '暂无详细介绍')}
                 </div>
                 
-                ${detail.source_url ? `<div style="margin-top: 32px; text-align: center;"><a href="${detail.source_url}" target="_blank" style="display:inline-block; padding:12px 32px; background:var(--color-science); color:white; text-decoration:none; border-radius:100px; font-weight:600; box-shadow:0 4px 12px rgba(33, 150, 243, 0.3); transition: transform 0.2s;"><i class="fa-solid fa-arrow-up-right-from-square"></i> 查看官方活动详情</a></div>` : ''}
+                ${detail.source_url ? `<div class="modal-action-btn-wrapper"><a href="${detail.source_url}" target="_blank" class="modal-action-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> 查看官方活动详情</a></div>` : ''}
             `;
         } catch (err) {
             console.error(err);
             const finalPeriod = formatEventDate(event.date_start, event.date_end, event.event_period || event.date);
             modalBody.innerHTML = `
                 ${event.image_url ? `
-                <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; width: 100%; max-height: 280px; display: flex; justify-content: center; align-items: center; background: #f1f3f5; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);">
-                    <img src="${event.image_url}" alt="${event.title_zh || '活动图片'}" style="width: 100%; height: auto; max-height: 280px; object-fit: cover;" onerror="this.parentElement.style.display='none';">
+                <div class="modal-image-container">
+                    <img src="${event.image_url}" alt="${event.title_zh || '活动图片'}" class="modal-image" onerror="this.parentElement.style.display='none';">
                 </div>
                 ` : ''}
-                <div class="card-tags" style="margin-bottom:12px;">${tagsHtml}</div>
-                <h2 style="margin-bottom: 16px; color: var(--text-dark);">${event.title_zh || event.title_ja}</h2>
-                <div class="card-meta" style="margin-bottom: 24px; padding: 16px; background: #F8F9FA; border-radius: 12px;">
+                <div class="card-tags modal-tags">${tagsHtml}</div>
+                <h2 class="modal-title-fallback">${event.title_zh || event.title_ja}</h2>
+                <div class="card-meta modal-meta-container">
                     <span><i class="fa-regular fa-clock"></i> ${finalPeriod} ${event.time_start || ''} ${event.time_end ? '- '+event.time_end : ''}</span>
                     <span><i class="fa-solid fa-location-dot"></i> ${event.ward || ''} ${event.venue || ''}</span>
                 </div>
-                <div class="card-summary" style="font-size: 15px; line-height: 1.8; color: #333;">${event.summary_zh ? md(event.summary_zh) : '<p>暂无详细介绍</p>'}</div>
-                ${event.source_url ? `<div style="margin-top: 32px; text-align: center;"><a href="${event.source_url}" target="_blank" style="display:inline-block; padding:12px 32px; background:var(--color-science); color:white; text-decoration:none; border-radius:100px; font-weight:600; box-shadow:0 4px 12px rgba(33, 150, 243, 0.3); transition: transform 0.2s;"><i class="fa-solid fa-arrow-up-right-from-square"></i> 查看官方活动详情</a></div>` : ''}
+                <div class="card-summary modal-summary">${event.summary_zh ? md(event.summary_zh) : '<p>暂无详细介绍</p>'}</div>
+                ${event.source_url ? `<div class="modal-action-btn-wrapper"><a href="${event.source_url}" target="_blank" class="modal-action-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> 查看官方活动详情</a></div>` : ''}
             `;
         }
     };

@@ -28,5 +28,63 @@
     "event_period": "2026-05-24",
     "image_url": "https://shibuya-city-neuvola.tokyo/neuvola/wp-content/uploads/2026/05/【26年度】ふたご告知画像チラシ-scaled.jpg",
     "id": "evt_20260524_000"
+  },
+  {
+    "title_ja": "モノマチワークショップ「ぐるぐるポシェット」",
+    "date": "2026-05-24",
+    "ward": "東京都",
+    "source_url": "https://iko-yo.net/events/570081",
+    "source_name": "いこーよ",
+    "source_type": "supplementary",
+    "free": false,
+    "price": null,
+    "title_zh": "Monomachi工坊：手作漩涡纹小挎包",
+    "age_min": 6,
+    "age_max": 10,
+    "type": "arts",
+    "score_reasoning": "教育与启发(22/25)：用一种特殊的“会画画”的缝纫机做包，锻炼孩子的创造力和动手能力。趣味与互动(24/25)：亲手操作机器，设计独一无二的图案，成就感满满，过程非常有趣。稀缺与独特(20/25)：这是一年一度Monomachi手工艺市集上的特别活动，使用的机器也很少见，体验独特。父母友好度(15/25)：基础分10，室内活动(+5)，工坊活动一般需要预约和付费，所以友好度一般。",
+    "ai_score": 81,
+    "ai_tags": [
+      "室内活动",
+      "动手体验",
+      "亲子互动",
+      "艺术手工"
+    ],
+    "summary_zh": "Monomachi市集上超酷的活动！带娃用一种会画画的缝纫机，亲手做一个独一无二的漩涡纹小挎包，特别又好玩！",
+    "rain_ok": true,
+    "date_start": "2026-05-24",
+    "date_end": "2026-05-24",
+    "event_period": "2026-05-24",
+    "image_url": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1679970/normal.jpg?1778122675",
+    "id": "evt_20260524_001"
+  },
+  {
+    "title_ja": "モノマチワークショップ「光るパラコードキーホルダー」",
+    "date": "2026-05-24",
+    "ward": "東京都",
+    "source_url": "https://iko-yo.net/events/570082",
+    "source_name": "いこーよ",
+    "source_type": "supplementary",
+    "free": false,
+    "price": null,
+    "title_zh": "Monomachi手工坊：制作发光伞绳钥匙扣",
+    "age_min": 5,
+    "age_max": 10,
+    "type": "arts",
+    "score_reasoning": "教育(15/25): 锻炼孩子的手眼协调和精细操作能力，能学会简单的编织技巧。趣味(22/25): 亲手制作一个会发光的钥匙扣，成品有很强的成就感，发光特性对孩子有巨大吸引力。稀缺(18/25): 活动是“Monomachi”手工艺节的一部分，这个节日本身是一年一度的，有一定稀缺性。友好(15/25): 室内活动，下雨也不怕。但这类手工坊通常需要预约和材料费。",
+    "ai_score": 70,
+    "ai_tags": [
+      "室内活动",
+      "亲子互动",
+      "手工制作",
+      "动手能力"
+    ],
+    "summary_zh": "来Monomachi手工坊，做一个晚上会发光的钥匙扣吧！挂在书包上超酷的！",
+    "rain_ok": true,
+    "date_start": "2026-05-24",
+    "date_end": "2026-05-24",
+    "event_period": "2026-05-24",
+    "image_url": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1679979/normal.jpg?1778123386",
+    "id": "evt_20260524_002"
   }
 ]
