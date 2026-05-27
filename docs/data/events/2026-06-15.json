@@ -22,6 +22,7 @@
     ],
     "summary_zh": "涩谷的co Shibuya有亲子交流会，可以带娃去放放电、认识新朋友。室内活动，下雨也不怕，很适合小宝宝们！",
     "rain_ok": true,
+    "indoor": false,
     "date_start": "2026-06-15",
     "date_end": "2026-06-15",
     "event_period": "6月15日 10:00-11:00",
