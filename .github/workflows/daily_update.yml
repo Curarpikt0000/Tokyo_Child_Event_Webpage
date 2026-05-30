@@ -35,7 +35,7 @@ jobs:
       - name: Run Scraping and LLM Processing
         env:
           GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
-          GEMINI_API_KEY: ${{ secrets.api_key }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           # 验证 Secret 是否存在
           if [ -z "$GOOGLE_APPLICATION_CREDENTIALS_JSON" ]; then
