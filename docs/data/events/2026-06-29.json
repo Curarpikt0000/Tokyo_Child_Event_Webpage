@@ -1,0 +1,60 @@
+[
+  {
+    "title_ja": "6月科学体験ラボゆかいな公開実験室Castaway～無人島からの脱出",
+    "date": "2026-06-29",
+    "ward": "東京都",
+    "source_url": "https://iko-yo.net/events/573539",
+    "source_name": "いこーよ",
+    "source_type": "supplementary",
+    "free": false,
+    "price": null,
+    "title_zh": "科学实验：无人岛大逃脱",
+    "age_min": 6,
+    "age_max": 10,
+    "type": "science",
+    "score_reasoning": "教育与启发(23/25): 活动以“无人岛逃生”为主题，将科学知识融入解决实际问题的场景中，能极大地激发孩子的好奇心和学习热情。\n趣味与互动(24/25): “逃脱游戏”的形式极具趣味性，加上是“体验实验室”，动手操作和沉浸式体验感会很强，孩子肯定全程投入。\n稀缺与独特(20/25): 将科学实验和逃脱游戏结合的活动形式新颖独特，不是每天都有的普通科学课，能给孩子带来特别的体验。\n父母友好度(15/25): 基础分10分。活动是室内实验室，不用担心天气，加5分。费用和预约情况未知，因此不额外加分。",
+    "ai_score": 82,
+    "ai_tags": [
+      "室内",
+      "科学启蒙",
+      "动手体验",
+      "亲子互动"
+    ],
+    "summary_zh": "快看这个无人岛逃生科学实验！让孩子像在玩闯关游戏一样学知识，设计得也太棒了！",
+    "rain_ok": true,
+    "date_start": "2026-06-29",
+    "date_end": "2026-06-29",
+    "event_period": "2026-06-29",
+    "image_url": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1688940/normal.png?1779677111",
+    "id": "evt_20260629_000"
+  },
+  {
+    "title_ja": "【6月】科学体験ラボ～あそべる自由開発室～",
+    "date": "2026-06-29",
+    "ward": "東京都",
+    "source_url": "https://iko-yo.net/events/573541",
+    "source_name": "いこーよ",
+    "source_type": "supplementary",
+    "free": false,
+    "price": null,
+    "title_zh": "6月科学体验：可玩的自由开发室",
+    "age_min": 4,
+    "age_max": 10,
+    "type": "science",
+    "score_reasoning": "教育与启发(23/25): 活动是科学体验实验室，能通过动手实践启发孩子对科学的兴趣，教育价值很高。\n趣味与互动(24/25): 名字里“可玩的”和“自由开发”就说明了趣味性，强调孩子可以自由探索和创造，互动性和沉浸感会非常强。\n稀缺与独特(18/25): 这是6月限定的活动，不是常设展，有一定稀缺性。“自由开发室”的模式也比普通的手工课更有新意和独特性。\n父母友好度(15/25): 基础分10分。作为室内活动，下雨也不怕，加5分。但费用和是否需要预约信息不明，因此无法获得更高加分。",
+    "ai_score": 80,
+    "ai_tags": [
+      "科学",
+      "室内",
+      "亲子互动",
+      "动手能力"
+    ],
+    "summary_zh": "6月新开的科学实验室，娃可以尽情动手搞小发明，特别适合好奇宝宝，快带去玩！",
+    "rain_ok": true,
+    "date_start": "2026-06-01",
+    "date_end": "2026-06-30",
+    "event_period": "6月",
+    "image_url": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1688942/normal.jpg?1779677358",
+    "id": "evt_20260629_001"
+  }
+]
