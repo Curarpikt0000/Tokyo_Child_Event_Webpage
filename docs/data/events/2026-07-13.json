@@ -1,0 +1,31 @@
+[
+  {
+    "title_ja": "【co Shibuya】7/13 10am-11am co ... 2026.06.26 更新 coしぶや",
+    "date": "2026-07-13",
+    "ward": "渋谷区",
+    "source_url": "https://shibuya-city-neuvola.tokyo/?p=16540",
+    "source_name": "渋谷区子育てネウボラ",
+    "source_type": "official",
+    "free": true,
+    "price": 0,
+    "title_zh": "涩谷区coしぶや亲子交流会",
+    "age_min": 0,
+    "age_max": 3,
+    "type": "culture",
+    "score_reasoning": "教育：主要是自由玩耍和社交，没有特定教学内容，教育性一般。趣味：孩子们可以一起玩玩具，与其他小朋友互动，趣味性不错。稀缺：这是区立设施的常规活动，非常普遍，不稀缺。友好：免费、室内、无需预约，对带小宝宝的父母来说非常友好，随时可以去。",
+    "ai_score": 50,
+    "ai_tags": [
+      "免费",
+      "室内活动",
+      "无需预约",
+      "亲子互动"
+    ],
+    "summary_zh": "在涩谷区的亲子设施coしぶや，可以带宝宝去和其他小朋友一起玩哦。是和其他妈妈们交流的好机会！",
+    "rain_ok": true,
+    "date_start": "2026-07-13",
+    "date_end": "2026-07-13",
+    "event_period": "7月13日 10:00-11:00",
+    "image_url": "https://shibuya-city-neuvola.tokyo/neuvola/wp-content/uploads/2026/06/2607_international告知_アートボード-1-scaled.jpg",
+    "id": "evt_20260713_000"
+  }
+]
