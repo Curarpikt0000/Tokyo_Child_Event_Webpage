@@ -1,0 +1,31 @@
+[
+  {
+    "title_ja": "【6月三鷹・裸足かけっこ＆体操教室/池田仁】in三鷹",
+    "date": "2026-07-01",
+    "ward": "東京都",
+    "source_url": "https://iko-yo.net/events/572359",
+    "source_name": "いこーよ",
+    "source_type": "supplementary",
+    "free": false,
+    "price": null,
+    "title_zh": "三鹰赤脚跑步和体操课",
+    "age_min": 3,
+    "age_max": 8,
+    "type": "sports",
+    "score_reasoning": "教育(20/25): 跑步和体操能有效锻炼孩子的运动能力和身体协调性，特别是赤脚跑对感官发育有益。趣味(22/25): 对好动的孩子来说，跑跑跳跳非常有趣，集体活动也能促进社交。稀缺(15/25): 赤脚跑步的理念比较新颖，但体操课本身比较常见。友好(10/25): 此类课程通常需要预约和付费，对父母的便利性一般。",
+    "ai_score": 67,
+    "ai_tags": [
+      "运动体能",
+      "技能学习",
+      "需预约",
+      "户外活动"
+    ],
+    "summary_zh": "三鹰的赤脚跑步和体操课来啦！让娃尽情撒欢、释放电力的好去处，还能锻炼身体平衡感，感觉超棒！",
+    "rain_ok": false,
+    "date_start": "2026-06-01",
+    "date_end": "2026-06-30",
+    "event_period": "2026年6月",
+    "image_url": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1685976/normal.jpg?1779170252",
+    "id": "evt_20260701_000"
+  }
+]
