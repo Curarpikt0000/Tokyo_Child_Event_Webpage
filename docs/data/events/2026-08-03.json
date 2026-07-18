@@ -1,0 +1,31 @@
+[
+  {
+    "title_ja": "【coしぶや】8/3.5.17.19 「しぶや縁むすびマルシ... 2026.07.17 更新 coしぶや",
+    "date": "2026-08-03",
+    "ward": "渋谷区",
+    "source_url": "https://shibuya-city-neuvola.tokyo/?p=16826",
+    "source_name": "渋谷区子育てネウボラ",
+    "source_type": "official",
+    "free": true,
+    "price": 0,
+    "title_zh": "涩谷结缘市集",
+    "age_min": 0,
+    "age_max": 10,
+    "type": "culture",
+    "score_reasoning": "教育(15/25): 孩子们可以接触到社区和商业，了解本地产品，但非系统性学习。趣味(20/25): 市集氛围热闹，有很多新奇的东西可以看，互动性强，适合全家一起逛。稀缺(15/25): 活动只在8月举办四天，有一定稀缺性，但市集类活动在东京不算特别罕见。友好(25/25): 基础分10分。在室内举办(+5)，不怕刮风下雨。市集通常免费入场(+5)，无需预约(+5)，对带娃家庭非常友好。",
+    "ai_score": 75,
+    "ai_tags": [
+      "室内",
+      "无需预约",
+      "亲子互动",
+      "免费"
+    ],
+    "summary_zh": "涩谷coしぶや的结缘市集又来啦！是个很棒的室内场地，有吃有玩，还能淘点好东西。周末带娃去逛逛正好，下雨也不怕！",
+    "rain_ok": true,
+    "date_start": "2026-08-03",
+    "date_end": "2026-08-19",
+    "event_period": "8月3日、5日、17日、19日",
+    "image_url": "https://shibuya-city-neuvola.tokyo/neuvola/wp-content/uploads/2026/07/しぶや縁むすびマルシェ告知-02.jpg",
+    "id": "evt_20260803_000"
+  }
+]
