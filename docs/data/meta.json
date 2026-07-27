@@ -1,24 +1,24 @@
 {
-  "last_updated": "2026-07-26T06:20:30.307751",
-  "total_events": 112,
+  "last_updated": "2026-07-27T06:45:31.321354",
+  "total_events": 109,
   "statistics": {
     "by_ward": {
       "渋谷区": 18,
       "新宿区": 26,
       "東京都": 33,
-      "江東区": 14,
-      "台東区": 19,
-      "中央区": 1,
-      "豊島区": 1
+      "江東区": 13,
+      "豊島区": 1,
+      "台東区": 17,
+      "中央区": 1
     },
     "by_type": {
-      "culture": 65,
-      "arts": 20,
+      "culture": 61,
+      "arts": 25,
       "science": 5,
       "performance": 5,
-      "outdoor": 9,
-      "nature": 5,
-      "sports": 2,
+      "sports": 3,
+      "nature": 4,
+      "outdoor": 5,
       "museum": 1
     }
   }
