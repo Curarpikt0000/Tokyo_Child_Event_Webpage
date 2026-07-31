@@ -1,0 +1,31 @@
+[
+  {
+    "title_ja": "【co Shibuya】8/17 10am-11am co ... 2026.07.30 更新 coしぶや",
+    "date": "2026-08-17",
+    "ward": "渋谷区",
+    "source_url": "https://shibuya-city-neuvola.tokyo/?p=17181",
+    "source_name": "渋谷区子育てネウボラ",
+    "source_type": "official",
+    "free": true,
+    "price": 0,
+    "title_zh": "涩谷区co Shibuya亲子交流会",
+    "age_min": 0,
+    "age_max": 6,
+    "type": "culture",
+    "score_reasoning": "教育与启发：此为社区中心日常聚会，非课程类，主要锻炼孩子的社交能力，教育性一般（5/25）。趣味与互动：孩子们可以一起玩耍，有基本的互动性，但无特定主题，趣味性中等（15/25）。稀缺与独特：这类社区活动非常普遍，几乎每天都有，稀缺度很低（2/25）。父母友好度：通常免费、无需预约，且为室内活动，对家长来说非常方便友好，得分很高（25/25）。",
+    "ai_score": 47,
+    "ai_tags": [
+      "免费",
+      "室内",
+      "无需预约",
+      "亲子互动"
+    ],
+    "summary_zh": "涩谷的妈妈们注意啦，co Shibuya有免费的室内活动哦！可以带宝宝去玩耍、认识新朋友，下雨天也不怕。",
+    "rain_ok": true,
+    "date_start": "2026-08-17",
+    "date_end": "2026-08-17",
+    "event_period": "8月17日 10:00-11:00",
+    "image_url": "https://shibuya-city-neuvola.tokyo/neuvola/wp-content/uploads/2026/07/2608international告知_アートボード-1-scaled.jpg",
+    "id": "evt_20260817_000"
+  }
+]
