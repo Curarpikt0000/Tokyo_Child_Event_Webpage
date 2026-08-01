@@ -22,6 +22,7 @@
     ],
     "summary_zh": "涩谷的妈妈们注意啦，co Shibuya有免费的室内活动哦！可以带宝宝去玩耍、认识新朋友，下雨天也不怕。",
     "rain_ok": true,
+    "indoor": false,
     "date_start": "2026-08-17",
     "date_end": "2026-08-17",
     "event_period": "8月17日 10:00-11:00",
