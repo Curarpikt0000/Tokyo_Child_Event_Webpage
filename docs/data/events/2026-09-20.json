@@ -1,0 +1,26 @@
+[
+  {
+    "title_ja": "【特別イベント】 POOK ROOM～デジタルアート発見ツアー～",
+    "date": "2026-09-20",
+    "ward": "東京都",
+    "source_url": "https://iko-yo.net/events/598075",
+    "source_name": "いこーよ",
+    "source_type": "supplementary",
+    "free": false,
+    "price": null,
+    "title_zh": "【特別イベント】 POOK ROOM～デジタルアート発見ツアー～",
+    "age_min": 0,
+    "age_max": 10,
+    "type": "outdoor",
+    "score_reasoning": "处理失败，自动给予基础分",
+    "ai_score": 60,
+    "ai_tags": [],
+    "summary_zh": "无可用摘要",
+    "rain_ok": false,
+    "date_start": "2026-09-20",
+    "date_end": "2026-09-20",
+    "event_period": "2026-09-20",
+    "image_url": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1749232/normal.png?1788493867",
+    "id": "evt_20260920_000"
+  }
+]
